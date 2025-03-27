@@ -18,7 +18,7 @@ class UserDatasourceImpl implements UserDatasource {
       final List<UserModel> usersModel = data.map((u) => UserModel.fromJson(u)).toList();
       return UserMapper.modelToEntity(usersModel.first);
     } catch (e) {
-      throw CustomError(message: 'error getting user');
+      throw CustomError(message: 'error al obtener usuario');
     }
   }
 }

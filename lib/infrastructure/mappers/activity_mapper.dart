@@ -6,7 +6,7 @@ class ActivityMapper {
     id: activity.idActividadColectiva,
     name: activity.nombreActividadColectiva,
     description: activity.descripcion,
-    imageURL: activity.imagen,
+    imageURL: 'assets/${activity.imagen}',
     trainerID: activity.entrenadorResponsable,
     users: activity.sociosInscritos,
     daySchedule: activity.diaClase,

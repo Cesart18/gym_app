@@ -21,17 +21,4 @@ class ActivityDatasourceImpl implements ActivityDatasource {
       throw CustomError(message: 'error getting activities');
     }
   }
-
-  @override
-  Future<List<Activity>> getUserActivities(int userID) async {
-try {
-      final resp = await rootBundle.loadString('assets/response_calls/list_activities.json');
-      final List<dynamic> data = json.decode(resp);
-      final List<ActivityModel> activitiesModel = data.map((a) => ActivityModel.fromJson(a)).toList();
-      final List<Activity> activities = activitiesModel.map((a) => ActivityMapper.modelToEntity(a)).toList();
-      return activities.where((a) => a.users.contains(userID)).toList();
-    } catch (e) {
-      throw CustomError(message: 'error getting activities');
-    }
-  }
 }

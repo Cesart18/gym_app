@@ -11,14 +11,14 @@ import 'package:gym_app/infrastructure/models/trainer_model.dart';
 
 class TrainerDatasourceImpl implements TrainerDatasource {
   @override
-  Future<Trainer> getTrainerByActivity(int activityID) async {
+  Future<Trainer> getTrainerByID(int trainerID) async {
     try {
       final resp = await rootBundle.loadString('assets/response_calls/list_trainers.json');
       final List<dynamic> data = json.decode(resp);
-      final List<TrainerModel> trainers = data.map((t) => TrainerModel.fromJson(json.decode(t))).toList();
-      return TrainerMapper.modelToEntity(trainers.firstWhere((t) => t.actividades.contains(activityID)));
+      final List<TrainerModel> trainers = data.map((t) => TrainerModel.fromJson(t)).toList();
+      return TrainerMapper.modelToEntity(trainers.firstWhere((t) => t.idTrainer == trainerID));
     } catch (e) {
-      throw CustomError(message: 'error getting trainer');
+      throw CustomError(message: 'error al obtener entrenador');
     }
   }
 }

@@ -23,8 +23,20 @@ class AppTheme {
 
 
     appBarTheme: const AppBarTheme(
-      centerTitle: true
-    )
+      centerTitle: true,
+      backgroundColor: backgroundColor,
+    ),
+
+    tabBarTheme: TabBarTheme(
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      dividerColor: backgroundColor,
+      indicatorColor: primaryColor,
+      indicator: const UnderlineTabIndicator(
+      borderSide: BorderSide(
+      color: primaryColor,
+      width: 2),),
+      labelColor: primaryColor,
+      unselectedLabelColor: primaryColor.withValues(alpha: 0.6)),
 
 
   );

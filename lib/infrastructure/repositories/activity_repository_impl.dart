@@ -15,9 +15,4 @@ class ActivityRepositoryImpl implements ActivityRepository {
   Future<List<Activity>> getGymActivities() {
     return datasource.getGymActivities();
   }
-
-  @override
-  Future<List<Activity>> getUserActivities(int userID) {
-    return datasource.getUserActivities(userID);
-  }
 } 

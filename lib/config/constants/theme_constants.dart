@@ -13,3 +13,6 @@ const secondaryColor = Color(0xFFFFFFFF);
 const textColor = Color(0xFF000000);
 const backgroundColor = Color(0xFFFFFFFF);
 
+const primaryVerticalPadding = 16.0;
+const primaryHorizontalPadding = 24.0;
+

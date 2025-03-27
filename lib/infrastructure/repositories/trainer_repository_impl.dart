@@ -13,7 +13,7 @@ class TrainerRepositoryImpl implements TrainerRepository {
   TrainerRepositoryImpl({TrainerDatasource? datasource}):datasource = datasource ?? TrainerDatasourceImpl();
 
   @override
-  Future<Trainer> getTrainerByActivity(int activityID) {
-    return datasource.getTrainerByActivity(activityID);
+  Future<Trainer> getTrainerByID(int trainerID) {
+    return datasource.getTrainerByID(trainerID);
   }
 }
