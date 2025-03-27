@@ -28,6 +28,7 @@ class ActivityCard extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
+              height: 200,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4)
