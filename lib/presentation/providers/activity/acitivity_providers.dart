@@ -72,12 +72,18 @@ class ActivityNotifier extends StateNotifier<List<Activity>> {
       return;
     }
 
+
     final currentActivity = state[index];
+
+    
 
     if (currentActivity.users.contains(userId)) {
       messageNotifier.setErrorMessage('El usuario está inscrito en esta actividad');
       return;
     }
+
+    
+
 
     final updatedActivity = currentActivity.copyWith(
       users: [...currentActivity.users, userId]
@@ -92,7 +98,31 @@ class ActivityNotifier extends StateNotifier<List<Activity>> {
     ];
   }
 
+  bool checkConflict(int activityId , int userId){
 
+    final index = state.indexWhere((activity) => activity.id == activityId);
+
+    if (index == -1) {
+      messageNotifier.setErrorMessage('Actividad no encontrada');
+      return true;
+    }
+
+
+    final currentActivity = state[index];
+
+    final userActivities = state.where((a) => a.users.contains(userId));
+
+    final hasConflict = userActivities.any((activity) =>
+      activity.daySchedule.toLowerCase() == currentActivity.daySchedule.toLowerCase() &&
+      activity.hourSchedule == currentActivity.hourSchedule
+    );
+
+    if (hasConflict) {
+      messageNotifier.setErrorMessage('El usuario ya tiene una actividad en ese horario');
+      return true;
+    }
+    return false;
+  }
 }
 
 

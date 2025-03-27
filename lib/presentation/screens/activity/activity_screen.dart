@@ -116,15 +116,20 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
                     ref.read(activityInfoProvider.notifier).loadActivity(widget.activityID);
                   }
                 },)
-              : () => Popups.showCustomAlertDialog(context, content: 'Confirmar suscripción', confirmText: 'confirmar',
-              confirmAction: () {
-                try {
-                    ref.read(activitiesProvider.notifier).addSuscription(activity.id, user?.id ?? 0);
-                  } finally{
-                    context.pop();
-                    ref.read(activityInfoProvider.notifier).loadActivity(widget.activityID);
+              : () {
+                  final hasConflict = ref.read(activitiesProvider.notifier).checkConflict(activity.id, user?.id ?? 0);
+                  if (!hasConflict){
+                    Popups.showCustomAlertDialog(context, content: 'Confirmar suscripción', confirmText: 'confirmar',
+                    confirmAction: () {
+                      try {
+                          ref.read(activitiesProvider.notifier).addSuscription(activity.id, user?.id ?? 0);
+                        } finally{
+                          context.pop();
+                          ref.read(activityInfoProvider.notifier).loadActivity(widget.activityID);
+                        }
+                    },);
                   }
-              },),
+              } ,
                child: Text(suscribed ? 'Cancelar suscripción' : 'Suscribirse',
                style: bodyMedium?.copyWith(
                 fontWeight: FontWeight.bold,
